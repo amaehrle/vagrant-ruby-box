@@ -8,7 +8,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = 'ubuntu/trusty64'
   config.vm.synced_folder './workspace', '/home/vagrant/workspace'
 
-  config.vm.network 'forwarded_port', guest: 5000, host: 5001
+  config.vm.network 'forwarded_port', guest: 5000, host: 5000
 
   config.vm.provision 'file', source: '~/.gitconfig', destination: '.gitconfig'
 
