@@ -7,9 +7,11 @@ VAGRANTFILE_API_VERSION = '2'
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = 'ubuntu/trusty64'
   config.vm.synced_folder './workspace', '/home/vagrant/workspace'
-
   config.vm.network 'forwarded_port', guest: 5000, host: 5000
+  config.vm.network 'forwarded_port', guest: 5100, host: 5100
 
+  config.ssh.forward_agent = true
+  config.ssh.private_key_path = "~/.ssh/id_rsa"
   config.vm.provision 'file', source: '~/.gitconfig', destination: '.gitconfig'
 
   config.vm.provision :shell, inline: [
@@ -21,7 +23,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     'wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh',
     'sudo gem install bundler'
   ].join(' && ')
-
 
   config.vm.provider :virtualbox do |vb|
     vb.customize ['modifyvm', :id, '--memory', '2048']
