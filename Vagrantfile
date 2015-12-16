@@ -18,7 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     'apt-get -y -q update',
     'apt-get -y -q upgrade',
     'apt-get -y -q install build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev', 
-    'apt-get -y -q install ruby-dev2.2 libsqlite3-dev ruby2.2',
+    'apt-get -y -q install ruby2.2-dev libsqlite3-dev ruby2.2',
     'wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh',
     'sudo gem install bundler'
   ].join(' && ')
