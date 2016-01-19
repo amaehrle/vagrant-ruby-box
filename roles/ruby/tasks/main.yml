@@ -1,0 +1,38 @@
+---
+- name: Install ruby dependencies
+  apt: name={{item}} state=latest update-cache=yes
+  with_items:
+    - build-essential
+    - git-core
+    - libreadline6-dev
+    - libyaml-dev
+    - libgdbm-dev
+    - libncurses5-dev
+    - libtool
+    - libffi-dev
+    - zlib1g
+    - zlib1g-dev
+
+- name: Download ruby
+  get_url: url={{ruby_url}} dest={{home_directory}}/ruby-{{ruby_version}}.tar
+
+- name: Extract ruby
+  command: tar -zxf {{home_directory}}/ruby-{{ruby_version}}.tar creates={{home_directory}}/ruby-{{ruby_version}}
+
+- name: Make, configure, and install ruby
+  command: "{{item}} chdir={{home_directory}}/ruby-{{ruby_version}}"
+  with_items:
+    - ./configure
+    - make
+    - make install
+
+- name: Download transcrypt 
+  git:
+    accept_hostkey=yes
+    dest={{working_directory}}/transcrypt
+    force=yes
+    repo=https://github.com/elasticdog/transcrypt.git
+    update=yes
+
+- name: link transcrypt  
+  shell: ln -s {{working_directory}}/transcrypt/transcrypt /usr/local/bin/transcrypt

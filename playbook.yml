@@ -1,0 +1,16 @@
+---
+- name: Ruby and Database
+  hosts: all
+  roles:
+    - ruby
+    - database
+  user: vagrant
+  sudo: true
+  vars:
+    home_directory: '/home/vagrant'
+    ruby_version: '2.2.3'
+    ruby_url: 'ftp://ftp.ruby-lang.org//pub/ruby/2.2/ruby-2.2.3.tar.gz'
+    working_directory: '/home/vagrant/workspace'
+    postgres_version: '9.3'
+
+

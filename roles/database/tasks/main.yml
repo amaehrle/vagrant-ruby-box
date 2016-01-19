@@ -1,0 +1,12 @@
+---
+- name: Install database dependencies
+  apt: name={{item}} state=latest update-cache=yes
+  with_items:
+    - libsqlite3-dev
+    - sqlite3
+    - libpq-dev
+    - postgresql
+    - postgresql-contrib
+  # needs fixing ...
+  # environment:
+  #   PATH: $PATH:/usr/lib/postgresql/{{item}}/bin
